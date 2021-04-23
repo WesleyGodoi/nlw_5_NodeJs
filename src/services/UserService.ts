@@ -5,10 +5,16 @@ import { UserRepository } from "../repositories/UsersRepository"
 
 
 class UserService {
-  private usersRepository: Repository<User>;
+      private usersRepository: Repository<User>;
 
   constructor(){
     this.usersRepository = getCustomRepository(UserRepository)    
+  }
+
+  async findByEmail(email: string) {
+    const user = await this.usersRepository.findOne({ email });
+  
+    return user;
   }
 
     async create(email: string) {
